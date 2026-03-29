@@ -20,6 +20,8 @@ public class SettingsControllers implements MouseListener{
         this.views.jLabelCategories.addMouseListener(this);
         this.views.jLabelReports.addMouseListener(this);
         this.views.jLabelSettings.addMouseListener(this);
+        
+        this.views.jLabelSales.addMouseListener(this);
     }
 
     @Override
@@ -68,6 +70,10 @@ public class SettingsControllers implements MouseListener{
         else if(e.getSource() == views.jLabelSettings){
             views.jPanelSetting.setBackground(new Color(152,202,63));
         }
+        
+        else if(e.getSource() == views.jLabelSales){
+            views.jPanelSales.setBackground(new Color(152,202,63));
+        }
                 
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -98,6 +104,10 @@ public class SettingsControllers implements MouseListener{
         }
         else if(e.getSource() == views.jLabelSettings){
             views.jPanelSetting.setBackground(new Color(18,45,61));
+        }
+        
+        else if(e.getSource() == views.jLabelSales){
+            views.jPanelSales.setBackground(new Color(18,45,61));
         }
         
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
