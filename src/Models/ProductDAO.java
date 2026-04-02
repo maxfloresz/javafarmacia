@@ -136,5 +136,104 @@ public class ProductDAO {
         }
     }
 //    tiempo del video 18.20
+    
+    //Buscar Producto //cuando doy click el cualquier producto me va aprecer en los labeltext
+    public Product searchProduct(int id){
+        String query = "SELECT pro.*, ca.name as category_name FROM products pro"
+                + "INNER JOIN categories ca ON pro.category_id = ca.id"
+                + "WHERE pro.id = ?";
+        Product product = new Product();
+        
+        try {
+            Connection conexion = ConexionSQLite.getConnection();
+            pst = conexion.prepareStatement(query);
+            pst.setInt(1, id);
+            rs = pst.executeQuery();
+            if(rs.next()){
+                product.setId(rs.getInt("id"));
+                product.setCode(rs.getInt("code"));
+                product.setName(rs.getString("name"));
+                product.setDescription(rs.getString("description"));
+                product.setUnit_price(rs.getDouble("unit_price"));
+                product.setProduct_quantity(rs.getInt("product_quantity"));
+                product.setCategory_id(rs.getInt("category_id"));
+                product.setCategory_name(rs.getString("category_name"));
+                
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en la consulta del producto "+e.getMessage());
+            
+        } finally {
+            ConexionSQLite.closeConnection();
+        }
+        return product;
+        
+    }
+    
+    //Buscar productos por codigo
+    public Product searchCode(int code){
+        String query = "SELECT pro.id, pro.name FROM products pro"
+                + "WHERE pro.code = ?";
+        Product product = new Product();
+        try {
+            
+            Connection conexion = ConexionSQLite.getConnection();
+            pst = conexion.prepareStatement(query);
+            pst.setInt(1, code);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                product.setId(rs.getInt("id"));
+                product.setName(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error el busqueda por producto "+e.getMessage());
+        } finally {
+            ConexionSQLite.closeConnection();
+        }
+        
+        return product;
+    }
+    
+    //Traer la cantidad de productos
+    public Product searchId(int id){
+        String query = "SELECT pro.product_cuantity FROM products pro"
+                + "WHERE pro.id = ?";
+        Product product = new Product();
+        
+        try {
+            Connection conexion = ConexionSQLite.getConnection();
+            pst = conexion.prepareStatement(query);
+            pst.setInt(1, id);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                product.setProduct_quantity(rs.getInt("product_cuantity"));
+                
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al consultar la cantidad de productos "+e.getMessage());
+        }finally{
+            ConexionSQLite.closeConnection();
+        }
+        return product;
+    }
+    
+    //Actualizar Stock
+    public boolean updateStockQuery(int amount, int product_id){
+        String query = "UPDATE products SET product_cuantity = ?"
+                + "WHERE id = ?";
+        try {
+            Connection conexion = ConexionSQLite.getConnection();
+            pst = conexion.prepareStatement(query);
+            pst.setInt(1, amount);
+            pst.setInt(2, product_id);
+            int rowAffected =  pst.executeUpdate();
+            return rowAffected > 0;
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar la cantidad de product "+e.getMessage());
+            return false;
+        } finally {
+            ConexionSQLite.closeConnection();
+        }
+    }
 }
 
