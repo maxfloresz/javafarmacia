@@ -516,6 +516,7 @@ public class SystemView extends javax.swing.JFrame {
 
         btn_loginOut.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_loginOut.setText("SALIR");
+        btn_loginOut.addActionListener(this::btn_loginOutActionPerformed);
         Cabecera.add(btn_loginOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 35, -1, 30));
 
         getContentPane().add(Cabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 1010, 100));
@@ -1731,6 +1732,15 @@ public class SystemView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_loginOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginOutActionPerformed
+        // TODO add your handling code here:
+        if(evt.getSource() == btn_loginOut){
+            dispose();
+            LoginView login = new LoginView();
+            login.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_loginOutActionPerformed
 
     /**
      * @param args the command line arguments

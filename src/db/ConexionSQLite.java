@@ -16,7 +16,7 @@ public class ConexionSQLite {
         if (conn == null) {
             try {
                 //ruta del archivo .db
-                String url = "jdbc:sqlite:D:\\PROGRAMAS\\sqliteBrowser\\proyectos_basesdedatos/" + database_name;
+                String url = "jdbc:sqlite:src/db/" + database_name;
 
                 conn = DriverManager.getConnection(url);
                 System.out.println("Conexión establecida con SQLite.");

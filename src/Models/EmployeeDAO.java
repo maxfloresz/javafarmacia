@@ -48,8 +48,9 @@ public class EmployeeDAO {
             pst.setString(2, password);
             
             rs = pst.executeQuery();
-
+            
             if(rs.next()){
+                System.out.println("-> ¡Registro encontrado en la DB!");
                 employee.setId(rs.getInt("id"));
                 id_user = employee.getId();
                 
@@ -71,13 +72,14 @@ public class EmployeeDAO {
                 employee.setRol(rs.getString("rol"));
                 rol_user  = employee.getRol();
                 
+            }else {
+                System.out.println("-> No hay coincidencias en la DB para el usuario: " + user);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error al obtener al empleado" +e);
         }finally{
             ConexionSQLite.closeConnection();
         }
-        
         return employee;
     }
     

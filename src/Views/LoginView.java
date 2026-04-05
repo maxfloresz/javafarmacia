@@ -4,6 +4,10 @@
  */
 package Views;
 
+import Controllers.LoginController;
+import Models.Employee;
+import Models.EmployeeDAO;
+
 /**
  *
  * @author MaxFlores
@@ -15,10 +19,17 @@ public class LoginView extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
+    
+    //instanciar clases
+    Employee employee = new Employee();
+    EmployeeDAO employee_dao = new EmployeeDAO();
+    
     public LoginView() {
         initComponents();
         setSize(930,420); // el tamaño de la ventana
         setResizable(false); // para que el usuario no redimensione la ventana
+         //agregamos el controlador login
+         LoginController employee_login = new LoginController(employee, employee_dao, this);
         setTitle("Ingresar al sistema");
         setLocationRelativeTo(null); //la ventana siempre este en centro
         this.repaint(); // para que otodos lo cambios se aplique
