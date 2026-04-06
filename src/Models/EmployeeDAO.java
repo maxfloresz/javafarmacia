@@ -87,25 +87,25 @@ public class EmployeeDAO {
 //    https://www.youtube.com/watch?v=4zzaaGKt-2k&list=PLffixYYr8M_uPiKk1VZOjhTHE8UGcQvKR&index=17
     //Registrar empleado
     public boolean  registerEmployeeQuery(Employee employee){
-        String query = "INSERT INTO employees (id, full_name, username, address, telephone, email, password, rol, created, updated)"
-                + "VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO employees (full_name, username, address, telephone, email, password, rol, created, updated)"
+                + "VALUES (?,?,?,?,?,?,?,?,?)";
         Timestamp datetime = new Timestamp(new Date().getTime());
-        
+        System.out.println(datetime);
         try {
             Connection conexion = ConexionSQLite.getConnection();
             pst = conexion.prepareStatement(query);
             
-            pst.setInt(1, employee.getId());
-            pst.setString(2, employee.getFull_name());
-            pst.setString(3, employee.getUsername());
-            pst.setString(4, employee.getAddress());
-            pst.setString(5, employee.getTelephone());
-            pst.setString(6, employee.getEmail());
-            pst.setString(7, employee.getPassword());
-            pst.setString(8, employee.getRol());
+//            pst.setInt(1, employee.getId()); //como mi base de datos puse autoincrementable es opcional
+            pst.setString(1, employee.getFull_name());
+            pst.setString(2, employee.getUsername());
+            pst.setString(3, employee.getAddress());
+            pst.setString(4, employee.getTelephone());
+            pst.setString(5, employee.getEmail());
+            pst.setString(6, employee.getPassword());
+            pst.setString(7, employee.getRol());
             
-            pst.setTimestamp(9, datetime);
-            pst.setTimestamp(10, datetime);
+            pst.setString(8, datetime.toString());
+            pst.setString(9, datetime.toString());
             
             pst.execute();
             
