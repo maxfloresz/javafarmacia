@@ -37,6 +37,8 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
         this.views.jt_employees_table.addMouseListener(this);
         //txt buscar a la escucha
         this.views.txt_search_employee.addKeyListener(this);
+        //boton de modificar
+        this.views.btn_update_employee.addActionListener(this);
     }
     
     
@@ -66,12 +68,45 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
                 if(employee_dao.registerEmployeeQuery(employee)){
                     cleanTable();
                     JOptionPane.showMessageDialog(null, "Empleado registrado con exito");
+                    cleanFields();
+                    listAllEmployees();
                 }else{
                     JOptionPane.showMessageDialog(null, "Ocurrio un error al registrar el empleado");
                 }
             }
                             
         }
+        if(e.getSource() == views.btn_update_employee){//si el usuario da click al boton de update
+            if(views.txt_employee_id.equals("")){//verificamos si los campos estam vacios
+                JOptionPane.showMessageDialog(null, "Selecciona una final de la tabla para continuar");
+            }else{
+                if(views.txt_employee_id.getText().equals("")
+                        || views.txt_employee_fullname.getText().equals("")
+                        || views.cmb_rol.getSelectedItem().toString().equals("")){
+                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+                }else{
+                    employee.setId(Integer.parseInt(views.txt_employee_id.getText().trim()));
+                    employee.setFull_name(views.txt_employee_fullname.getText().trim());
+                    employee.setUsername(views.txt_employee_username.getText().trim());
+                    employee.setAddress(views.txt_employee_address.getText().trim());
+                    employee.setTelephone(views.txt_employee_telephone.getText().trim());
+                    employee.setEmail(views.txt_employee_email.getText().trim());
+                    employee.setPassword(String.valueOf(views.txt_employee_password.getPassword()));
+                    employee.setRol(views.cmb_rol.getSelectedItem().toString());
+                    if(employee_dao.updateEmployeeQuery(employee)){
+                        cleanTable();
+                        listAllEmployees();
+                        views.btn_register_employee.setEnabled(true);
+                        JOptionPane.showMessageDialog(null, "Datos modificados Exitosamente");
+                        cleanFields();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Ha ocurrido un error al modificar el empleado");
+                    }
+                }
+            }
+        }
+        
+        
     }
 
     
@@ -94,6 +129,18 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
         }
     }
     
+    //Limpiar campos
+    public void cleanFields(){
+        views.txt_employee_id.setText("");
+        views.txt_employee_fullname.setText("");
+        views.txt_employee_username.setText("");
+        views.txt_employee_address.setText("");
+        views.txt_employee_telephone.setText("");
+        views.txt_employee_email.setText("");
+        views.txt_employee_password.setText("");
+        views.txt_employee_password.setEnabled(true);
+        views.cmb_rol.setSelectedItem(0);
+    }
     
     @Override
     public void mouseClicked(MouseEvent e) {

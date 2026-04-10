@@ -165,7 +165,7 @@ public class EmployeeDAO {
     // Modificar empleado
     public boolean updateEmployeeQuery( Employee employee){
         String query = "UPDATE employees SET full_name = ?, username=?, address=?,"
-                + "telephone=?, email=?. rol=?, update=?"
+                + "telephone=?, email=?, rol=?, updated=?"
                 + "WHERE id = ?";
         
         Timestamp dateTime = new Timestamp(new Date().getTime());
@@ -180,7 +180,7 @@ public class EmployeeDAO {
             pst.setString(4, employee.getTelephone());
             pst.setString(5, employee.getEmail());
             pst.setString(6, employee.getRol());
-            pst.setTimestamp(7, dateTime);
+            pst.setString(7, dateTime.toString());
             pst.setInt(8, employee.getId());
             
             pst.execute();
