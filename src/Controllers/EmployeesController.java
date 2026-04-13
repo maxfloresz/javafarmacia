@@ -39,6 +39,10 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
         this.views.txt_search_employee.addKeyListener(this);
         //boton de modificar
         this.views.btn_update_employee.addActionListener(this);
+        //Boton de eliminar
+        this.views.btn_delete_employe.addActionListener(this);
+        //Boton de cancelar
+        this.views.btn_cancel_employee.addActionListener(this);
     }
     
     
@@ -104,6 +108,35 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
                     }
                 }
             }
+        }
+        //eliminar empleado
+        if(e.getSource() == views.btn_delete_employe){
+            int row = views.jt_employees_table.getSelectedRow();
+            if(row == -1){
+                JOptionPane.showMessageDialog(null, "Debes seleccionar un empleado para eliminarlo");
+            }else if(views.jt_employees_table.getValueAt(row, 0).equals(EmployeeDAO.id_user)){
+                JOptionPane.showMessageDialog(null, "No puede eliminar al usuario autenticado");
+            }else{
+                int id = Integer.parseInt(views.jt_employees_table.getValueAt(row, 0).toString());
+                int question = JOptionPane.showConfirmDialog(null, "En realidad quiere eliminar este empleado.");
+                if(question == 0 && employee_dao.deleteEmployeeQuery(id) != false){
+                    cleanTable();
+                    cleanFields();
+                    views.btn_register_employee.setEnabled(true);
+                    views.txt_employee_password.setEnabled(true);
+                    listAllEmployees();
+                    JOptionPane.showMessageDialog(null, "El usuario fue eliminado con exito");
+                }
+            }
+        }
+        
+        //Cancelar
+        if(e.getSource() == views.btn_cancel_employee){
+            cleanFields();
+            views.btn_register_employee.setEnabled(true);
+            views.txt_employee_password.setEnabled(true);
+            views.txt_employee_id.setEnabled(true);
+            views.txt_employee_id.setEditable(true);
         }
         
         
