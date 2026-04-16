@@ -43,6 +43,11 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
         this.views.btn_delete_employe.addActionListener(this);
         //Boton de cancelar
         this.views.btn_cancel_employee.addActionListener(this);
+        //Boton de modificar password
+        this.views.btn_update_data_profile.addActionListener(this);
+        
+        //Colocar el label a la escucha
+        this.views.jLabelEmployees.addMouseListener(this);
     }
     
     
@@ -139,6 +144,25 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
             views.txt_employee_id.setEditable(true);
         }
         
+        //moficiar contraseña
+        if(e.getSource() == views.btn_update_data_profile){
+            String password = String.valueOf(views.txt_password_modify_profile.getPassword());
+            String password_confirm = String.valueOf(views.txt_password_modify_confir.getPassword());
+            if(!password.equals("") && !password_confirm.equals("")){
+                if(password.equals(password_confirm)){
+                    employee.setPassword(String.valueOf(views.txt_password_modify_profile.getPassword()));
+                    if(employee_dao.updateEmployeePassword(employee) != false){
+                        JOptionPane.showMessageDialog(null, "Se modifico correctamente la contraseña");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Ocurrio un error al modificar el password");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Los campos contraseña estan vacios");
+            }
+        }
         
     }
 
@@ -191,6 +215,19 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
             views.txt_employee_password.setEnabled(false);
             views.btn_register_employee.setEnabled(false);
             
+        }
+        
+        if(e.getSource() == views.jLabelEmployees){
+            if(rol.equals("Administrador")){
+                views.jTabbedPane1.setSelectedIndex(4);
+                cleanTable();
+                cleanFields();
+                listAllEmployees();
+            }else{
+                views.jTabbedPane1.setEnabledAt(4, false);
+                views.jLabelEmployees.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "No tienes privilegios de aministrador par acceder a vista empleados");
+            }
         }
         
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

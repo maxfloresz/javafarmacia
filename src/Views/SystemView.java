@@ -42,7 +42,8 @@ public class SystemView extends javax.swing.JFrame {
         
         setSize(1208,680); // Dimensiones de la ventana
         setResizable(false); // No pueda modificar la ventana los tamaños
-        setTitle("Panel de Administracion"); // Titulo de la ventana
+        titleInterface();
+        // setTitle("Panel de Administracion"); // Titulo de la ventana
         setLocationRelativeTo(null); // para centrar la vetana
         
         this.repaint(); // para aplicar los cambio
@@ -55,6 +56,15 @@ public class SystemView extends javax.swing.JFrame {
         employee_acount.listAllEmployees();
         
         
+    }
+    
+    
+    public String titleInterface(){
+        setTitle("Panel - "+ EmployeeDAO.rol_user);
+        label_name_employee.setText(EmployeeDAO.full_name);
+        label_name_rol.setText(EmployeeDAO.rol_user);
+        
+        return EmployeeDAO.rol_user.trim();
     }
 
     /**
@@ -91,6 +101,8 @@ public class SystemView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btn_photo = new javax.swing.JButton();
         btn_loginOut = new javax.swing.JButton();
+        label_name_employee = new javax.swing.JLabel();
+        label_name_rol = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
@@ -531,6 +543,16 @@ public class SystemView extends javax.swing.JFrame {
         btn_loginOut.setText("SALIR");
         btn_loginOut.addActionListener(this::btn_loginOutActionPerformed);
         Cabecera.add(btn_loginOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 35, -1, 30));
+
+        label_name_employee.setBackground(new java.awt.Color(255, 255, 255));
+        label_name_employee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        label_name_employee.setForeground(new java.awt.Color(255, 255, 255));
+        Cabecera.add(label_name_employee, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, 160, 30));
+
+        label_name_rol.setBackground(new java.awt.Color(255, 255, 255));
+        label_name_rol.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        label_name_rol.setForeground(new java.awt.Color(255, 255, 255));
+        Cabecera.add(label_name_rol, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, 160, 30));
 
         getContentPane().add(Cabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 1010, 100));
 
@@ -1652,18 +1674,23 @@ public class SystemView extends javax.swing.JFrame {
 
         txt_id_profile.setEditable(false);
         txt_id_profile.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_id_profile.setEnabled(false);
 
         txt_name_profile.setEditable(false);
         txt_name_profile.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_name_profile.setEnabled(false);
 
         txt_address_profile.setEditable(false);
         txt_address_profile.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_address_profile.setEnabled(false);
 
         txt_telephone_profile.setEditable(false);
         txt_telephone_profile.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_telephone_profile.setEnabled(false);
 
         txt_email_profile.setEditable(false);
         txt_email_profile.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_email_profile.setEnabled(false);
 
         txt_password_modify_profile.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
@@ -1923,7 +1950,7 @@ public class SystemView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     public javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    public javax.swing.JTabbedPane jTabbedPane1;
     public javax.swing.JTable jt_all_purchases;
     public javax.swing.JTable jt_all_sales;
     public javax.swing.JTable jt_categories_table;
@@ -1933,6 +1960,8 @@ public class SystemView extends javax.swing.JFrame {
     public javax.swing.JTable jt_purchases_table;
     private javax.swing.JTable jt_sale_table;
     public javax.swing.JTable jt_supplier_table;
+    public javax.swing.JLabel label_name_employee;
+    public javax.swing.JLabel label_name_rol;
     public javax.swing.JTextField text_search_product;
     public javax.swing.JTextField txt_address_profile;
     public javax.swing.JTextField txt_category_id;

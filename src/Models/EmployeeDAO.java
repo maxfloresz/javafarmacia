@@ -213,8 +213,8 @@ public class EmployeeDAO {
     }
     
     //Cambiar Password
-    public boolean deleteEmployeePassword(Employee employee){
-        String quey = "UPDATE employees SET password = ? WHERE username = "+username_user+"";
+    public boolean updateEmployeePassword(Employee employee){
+        String quey = "UPDATE employees SET password = ? WHERE username = '"+username_user+"'";
         
         try {
             Connection conexion = ConexionSQLite.getConnection();

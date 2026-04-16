@@ -1,6 +1,7 @@
 
 package Controllers;
 
+import Models.EmployeeDAO;
 import Views.SystemView;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -22,6 +23,8 @@ public class SettingsControllers implements MouseListener{
         this.views.jLabelSettings.addMouseListener(this);
         
         this.views.jLabelSales.addMouseListener(this);
+        
+        Profile();
     }
 
     @Override
@@ -111,6 +114,17 @@ public class SettingsControllers implements MouseListener{
         }
         
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
+    
+    private void Profile() {
+        this.views.txt_id_profile.setText(""+EmployeeDAO.id_user);
+        this.views.txt_name_profile.setText(EmployeeDAO.full_name);
+        this.views.txt_address_profile.setText(EmployeeDAO.address_user);
+        this.views.txt_telephone_profile.setText(EmployeeDAO.telephone_user);
+        this.views.txt_email_profile.setText(EmployeeDAO.email_user);
+        
     }
     
     
