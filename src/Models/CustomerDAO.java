@@ -33,8 +33,8 @@ public class CustomerDAO {
             pst.setString(2, customer.getAddress());
             pst.setString(3, customer.getTelephone());
             pst.setString(4, customer.getEmail());
-            pst.setTimestamp(5, dateTime);
-            pst.setTimestamp(6, dateTime);
+            pst.setString(5, dateTime.toString());
+            pst.setString(6, dateTime.toString());
             
             pst.execute();
             return true;

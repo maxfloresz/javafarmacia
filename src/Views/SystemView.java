@@ -16,8 +16,11 @@
 //https://www.youtube.com/watch?v=kNpQCg_tGCQ&list=PLffixYYr8M_uPiKk1VZOjhTHE8UGcQvKR&index=11
 package Views;
 
+import Controllers.CustomersController;
 import Controllers.EmployeesController;
 import Controllers.SettingsControllers;
+import Models.Customer;
+import Models.CustomerDAO;
 import Models.Employee;
 import Models.EmployeeDAO;
 
@@ -33,9 +36,14 @@ public class SystemView extends javax.swing.JFrame {
      * Creates new form SystemView
      */
     
-    //Crear instancias //empleado/employee
+    //Crear instancias
+    
+    //empleado/employee
     Employee employee = new Employee();
     EmployeeDAO employee_dao = new EmployeeDAO();
+    //Cliente / customer
+    Customer customer = new Customer();
+    CustomerDAO customer_dao = new CustomerDAO();
     
     public SystemView() {
         initComponents();
@@ -52,9 +60,10 @@ public class SystemView extends javax.swing.JFrame {
         SettingsControllers setting = new SettingsControllers(this);
         //Controlador de mepleados / emloyee
         EmployeesController employee_acount = new EmployeesController(employee, employee_dao, this);
-        
         employee_acount.listAllEmployees();
         
+        //Controlador de cliente / customer
+        CustomersController customer_account = new CustomersController(customer, customer_dao, this);
         
     }
     
