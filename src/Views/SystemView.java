@@ -64,7 +64,7 @@ public class SystemView extends javax.swing.JFrame {
         
         //Controlador de cliente / customer
         CustomersController customer_account = new CustomersController(customer, customer_dao, this);
-        
+        customer_account.listAllCustomers();
     }
     
     
@@ -1164,11 +1164,11 @@ public class SystemView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Identificacion", "Nombre", "Telefono", "Direccion", "Correo"
+                "Identificacion", "Nombre", "Direccion", "Telefono", "Correo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
