@@ -19,10 +19,13 @@ package Views;
 import Controllers.CustomersController;
 import Controllers.EmployeesController;
 import Controllers.SettingsControllers;
+import Controllers.SuppliersController;
 import Models.Customer;
 import Models.CustomerDAO;
 import Models.Employee;
 import Models.EmployeeDAO;
+import Models.Supplier;
+import Models.SupplierDAO;
 
 /**
  *
@@ -44,6 +47,9 @@ public class SystemView extends javax.swing.JFrame {
     //Cliente / customer
     Customer customer = new Customer();
     CustomerDAO customer_dao = new CustomerDAO();
+    //Proveedor
+    Supplier supplier = new Supplier();
+    SupplierDAO supplier_dao = new SupplierDAO();
     
     public SystemView() {
         initComponents();
@@ -65,6 +71,10 @@ public class SystemView extends javax.swing.JFrame {
         //Controlador de cliente / customer
         CustomersController customer_account = new CustomersController(customer, customer_dao, this);
         customer_account.listAllCustomers();
+        
+        //Controler proveedor /supplier
+        SuppliersController supplier_account = new SuppliersController(supplier, supplier_dao, this);
+        
     }
     
     
@@ -247,7 +257,7 @@ public class SystemView extends javax.swing.JFrame {
         txt_supplier_telephone = new javax.swing.JTextField();
         txt_supplier_email = new javax.swing.JTextField();
         txt_supplier_description = new javax.swing.JTextField();
-        txt_supplier__id = new javax.swing.JTextField();
+        txt_supplier_id = new javax.swing.JTextField();
         cbx_supplier_city = new javax.swing.JComboBox<>();
         btn_register_supplier = new javax.swing.JButton();
         btn_update_supplier = new javax.swing.JButton();
@@ -1376,9 +1386,9 @@ public class SystemView extends javax.swing.JFrame {
 
         txt_supplier_description.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txt_supplier__id.setEditable(false);
-        txt_supplier__id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txt_supplier__id.setEnabled(false);
+        txt_supplier_id.setEditable(false);
+        txt_supplier_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_supplier_id.setEnabled(false);
 
         cbx_supplier_city.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbx_supplier_city.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ciudad de Mexico", "Monterrey", "Queretaro", "San Juan de Rio" }));
@@ -1423,7 +1433,7 @@ public class SystemView extends javax.swing.JFrame {
                                 .addGap(20, 20, 20)
                                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_supplier_description, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_supplier__id, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_supplier_id, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cbx_supplier_city, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(80, 80, 80))
                     .addGroup(jPanel13Layout.createSequentialGroup()
@@ -1459,7 +1469,7 @@ public class SystemView extends javax.swing.JFrame {
                     .addComponent(jLabel35)
                     .addComponent(jLabel39)
                     .addComponent(txt_supplier_telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_supplier__id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_supplier_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_delete_supplier, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2019,10 +2029,10 @@ public class SystemView extends javax.swing.JFrame {
     public javax.swing.JTextField txt_search_customer;
     public javax.swing.JTextField txt_search_employee;
     public javax.swing.JTextField txt_search_supplier;
-    public javax.swing.JTextField txt_supplier__id;
     public javax.swing.JTextField txt_supplier_address;
     public javax.swing.JTextField txt_supplier_description;
     public javax.swing.JTextField txt_supplier_email;
+    public javax.swing.JTextField txt_supplier_id;
     public javax.swing.JTextField txt_supplier_name;
     public javax.swing.JTextField txt_supplier_telephone;
     public javax.swing.JTextField txt_telephone_profile;

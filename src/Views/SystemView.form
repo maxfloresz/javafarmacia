@@ -2680,7 +2680,7 @@
                                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="txt_supplier_description" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
-                                              <Component id="txt_supplier__id" min="-2" pref="165" max="-2" attributes="0"/>
+                                              <Component id="txt_supplier_id" min="-2" pref="165" max="-2" attributes="0"/>
                                               <Component id="cbx_supplier_city" min="-2" pref="165" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -2727,7 +2727,7 @@
                               <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txt_supplier_telephone" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="txt_supplier__id" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="txt_supplier_id" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="btn_delete_supplier" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -2848,7 +2848,7 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txt_supplier__id">
+                <Component class="javax.swing.JTextField" name="txt_supplier_id">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

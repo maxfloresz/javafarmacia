@@ -19,7 +19,7 @@ public class SupplierDAO {
     
     //Registrar Proveedor
     public boolean registerSuppliersQuery(Supplier supplier){
-        String query= "INSERT INTO suppliers(nombre,description,address,telephone,email,city,created,update)"
+        String query= "INSERT INTO suppliers(name,description,address,telephone,email,city,created,updated)"
                 + "VALUES (?,?,?,?,?,?,?,?)";
         Timestamp dateTime = new Timestamp(new Date().getTime());
         
@@ -32,8 +32,8 @@ public class SupplierDAO {
             pst.setString(4, supplier.getTelephone());
             pst.setString(5, supplier.getEmail());
             pst.setString(6, supplier.getCity());
-            pst.setTimestamp(7, dateTime);
-            pst.setTimestamp(8, dateTime);
+            pst.setString(7, dateTime.toString());
+            pst.setString(8, dateTime.toString());
             
             int rowEffected = pst.executeUpdate();
             
@@ -88,7 +88,7 @@ public class SupplierDAO {
     
     // Modificar proveedor
     public boolean updateSuppliersQuery(Supplier supplier){
-        String query = "UPDATE suppliers SET name= ?, description=?, address=?, telephone=?, email=?, city=?,update=?"
+        String query = "UPDATE suppliers SET name= ?, description=?, address=?, telephone=?, email=?, city=?,updated=?"
                 + "WHERE id = ?";
         Timestamp dateTime = new Timestamp(new Date().getTime());
         
