@@ -11,7 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class SuppliersController implements ActionListener, MouseListener, KeyListener{
 
@@ -21,6 +23,7 @@ public class SuppliersController implements ActionListener, MouseListener, KeyLi
     private SystemView views;
     
     String rol = EmployeeDAO.rol_user;
+    DefaultTableModel model = new DefaultTableModel();
 
     //contructor
     public SuppliersController(Supplier supplier, SupplierDAO supplier_dao, SystemView views) {
@@ -30,6 +33,11 @@ public class SuppliersController implements ActionListener, MouseListener, KeyLi
         
         //register /escucha
         this.views.btn_register_supplier.addActionListener(this);
+        //tabla
+        this.views.jt_supplier_table.addMouseListener(this);
+        //buscar /escucha
+        this.views.txt_search_supplier.addKeyListener(this);
+        //
     }
     
     
@@ -52,6 +60,8 @@ public class SuppliersController implements ActionListener, MouseListener, KeyLi
                 supplier.setEmail(views.txt_supplier_email.getText().trim());
                 supplier.setCity(views.cbx_supplier_city.getSelectedItem().toString());
                 if(supplier_dao.registerSuppliersQuery(supplier)){
+                    cleanTable();
+                    listAllSuppliers();
                     JOptionPane.showMessageDialog(null, "Se registro empleado");
                 }else{
                     JOptionPane.showMessageDialog(null, "Error al registrar empleado");
@@ -62,9 +72,43 @@ public class SuppliersController implements ActionListener, MouseListener, KeyLi
         
     }
 
+    //listar Proveedores
+    public void listAllSuppliers(){
+        if(rol.equals("Administrador")){
+            List<Supplier> list = supplier_dao.listSuppliersQuery(views.txt_search_supplier.getText());
+            model = (DefaultTableModel) views.jt_supplier_table.getModel();
+            Object[] row = new Object[7];
+            for(int i=0; i < list.size(); i++){
+                row[0] = list.get(i).getId();
+                row[1] = list.get(i).getName();
+                row[2] = list.get(i).getDescription();
+                row[3] = list.get(i).getAddress();
+                row[4] = list.get(i).getTelephone();
+                row[5] = list.get(i).getEmail();
+                row[6] = list.get(i).getCity();
+                model.addRow(row);
+            }
+            views.jt_supplier_table.setModel(model);
+        }
+    }
+    
+    
     @Override
     public void mouseClicked(MouseEvent e) {
 
+        if(e.getSource() == views.jt_supplier_table){
+            int row = views.jt_supplier_table.rowAtPoint(e.getPoint());
+            views.txt_supplier_id.setText(views.jt_supplier_table.getValueAt(row, 0).toString());
+            views.txt_supplier_name.setText(views.jt_supplier_table.getValueAt(row, 1).toString());
+            views.txt_supplier_description.setText(views.jt_supplier_table.getValueAt(row, 2).toString());
+            views.txt_supplier_address.setText(views.jt_supplier_table.getValueAt(row, 3).toString());
+            views.txt_supplier_telephone.setText(views.jt_supplier_table.getValueAt(row, 4).toString());
+            views.txt_supplier_email.setText(views.jt_supplier_table.getValueAt(row, 5).toString());
+            views.cbx_supplier_city.setSelectedItem(views.jt_supplier_table.getValueAt(row, 6).toString());
+            
+            views.btn_register_supplier.setEnabled(false);
+            views.txt_supplier_id.setEditable(false);
+        }
     }
 
     @Override
@@ -100,6 +144,17 @@ public class SuppliersController implements ActionListener, MouseListener, KeyLi
     @Override
     public void keyReleased(KeyEvent e) {
 
+        if(e.getSource() == views.txt_search_supplier){
+            cleanTable();
+            listAllSuppliers();
+        }
     }
     
+    //metodo limpiar
+    public void cleanTable(){
+        for(int i = 0 ; i < model.getRowCount(); i++){
+            model.removeRow(i);
+            i = i-1;
+        }
+    }
 }

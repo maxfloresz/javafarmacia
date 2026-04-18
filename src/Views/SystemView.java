@@ -74,7 +74,7 @@ public class SystemView extends javax.swing.JFrame {
         
         //Controler proveedor /supplier
         SuppliersController supplier_account = new SuppliersController(supplier, supplier_dao, this);
-        
+        supplier_account.listAllSuppliers();
     }
     
     

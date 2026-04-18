@@ -72,7 +72,7 @@ public class SupplierDAO {
                 suppliers.setAddress(rs.getString("address"));
                 suppliers.setTelephone(rs.getString("telephone"));
                 suppliers.setEmail(rs.getString("email"));
-                suppliers.setCity(rs.getString("ciry"));
+                suppliers.setCity(rs.getString("city"));
                 
                 list_supplier.add(suppliers);
             }
