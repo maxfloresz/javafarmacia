@@ -34,7 +34,14 @@ public class CustomersController implements ActionListener, MouseListener, KeyLi
         this.views.jt_customer_table.addMouseListener(this);
         //buscador
         this.views.txt_search_customer.addKeyListener(this);
-        
+        //Modificar btn
+        this.views.btn_update_customer.addActionListener(this);
+        //Eliminar
+        this.views.btn_delete_customer.addActionListener(this);
+        //cancelar
+        this.views.btn_cancel_customer.addActionListener(this);
+        //Clientes jlabel
+        this.views.jLabelCustomers.addMouseListener(this);
     }
     
     @Override
@@ -62,7 +69,74 @@ public class CustomersController implements ActionListener, MouseListener, KeyLi
                 }
             }
         }
+        
+        //actualizar
+        if(e.getSource() == views.btn_update_customer){
+            if(views.txt_customer_id.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Seleccione una fila para continuar");
+            }else{
+                if(views.txt_customer_id.getText().equals("")
+                        || views.txt_customer_fullname.getText().equals("")
+                        || views.txt_customer_address.getText().equals("")
+                        || views.txt_customer_telephone.getText().equals("")
+                        || views.txt_customer_email.getText().equals("")){
+                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+                }else{
+                    customer.setId(Integer.parseInt(views.txt_customer_id.getText().trim()));
+                    customer.setFull_name(views.txt_customer_fullname.getText().trim());
+                    customer.setAddress(views.txt_customer_address.getText().trim());
+                    customer.setEmail(views.txt_customer_email.getText().trim());
+                    customer.setTelephone(views.txt_customer_telephone.getText().trim());
+                    if(customer_dao.updateCustomersQuery(customer)){
+                        cleanTable();
+                        cleanFields();
+                        listAllCustomers();
+                        views.btn_register_customer.setEnabled(true);
+                        JOptionPane.showMessageDialog(null, "Datos del cliente modificador con exito");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Ha ocurrido un error al modificar cliente");
+                    }
+                }
+            }
+        }
+        
+        //Eliminar
+        if(e.getSource() == views.btn_delete_customer){
+            int row = views.jt_customer_table.getSelectedRow();
+            if(row == -1){
+                JOptionPane.showMessageDialog(null, "Debes seleccionar un cliente para eliminar");
+            }else{
+                int id = Integer.parseInt(views.jt_customer_table.getValueAt(row, 0).toString());
+                int question = JOptionPane.showConfirmDialog(null, "Seguro que quiere eliminar?");
+                if(question == 0 && customer_dao.deleteCustomersQuery(id) != false){
+                    cleanFields();
+                    cleanTable();
+                    listAllCustomers();
+                    views.btn_register_customer.setEnabled(true);
+                    JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente");
+                }
+            }
+        }
+        
+        //Cancelar
+        if(e.getSource() == views.btn_cancel_customer){
+            views.btn_register_customer.setEnabled(true);
+            cleanFields();
+        }
     }
+    
+    
+    //limpiar los campos de texto
+    public void cleanFields(){
+        views.txt_customer_id.setText("");
+        views.txt_customer_id.setEditable(true);
+        views.txt_customer_id.setEnabled(true);
+        views.txt_customer_fullname.setText("");
+        views.txt_customer_address.setText("");
+        views.txt_customer_telephone.setText("");
+        views.txt_customer_email.setText("");
+    }
+    
 //    https://www.youtube.com/watch?v=xpYnYO7u8p0&list=PLffixYYr8M_uPiKk1VZOjhTHE8UGcQvKR&index=38
     //Listar Clientes
     public void listAllCustomers(){
@@ -94,6 +168,14 @@ public class CustomersController implements ActionListener, MouseListener, KeyLi
             views.btn_register_customer.setEnabled(false);
             views.txt_customer_id.setEditable(false);
             views.txt_customer_id.setEnabled(false);
+        }
+        
+        //para navegacion de ventanas
+        if(e.getSource() == views.jLabelCustomers){
+            views.jTabbedPane1.setSelectedIndex(3);
+            cleanFields();
+            cleanTable();
+            listAllCustomers();
         }
     }
 

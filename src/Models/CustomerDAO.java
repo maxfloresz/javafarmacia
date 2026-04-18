@@ -102,7 +102,7 @@ public class CustomerDAO {
             pst.setString(2, customer.getAddress());
             pst.setString(3, customer.getTelephone());
             pst.setString(4, customer.getEmail());
-            pst.setTimestamp(5, dateTime);
+            pst.setString(5, dateTime.toString());
             pst.setInt(6, customer.getId());
             
             int rowsAffected = pst.executeUpdate(); //executeupdated devuelve cuantas filas fueron afectadas
@@ -123,7 +123,10 @@ public class CustomerDAO {
             Connection con = ConexionSQLite.getConnection();
             pst = con.prepareStatement(query);
             
+            pst.setInt(1, id);
+            
             int rowsAffected = pst.executeUpdate(); // devuelve cuantas filas afecto
+            System.out.println(rowsAffected);
             return rowsAffected > 0; // si afecto a 1 o mas filas en la eliminacion esta bien
             
         } catch (SQLException e) {
