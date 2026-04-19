@@ -39,6 +39,13 @@ public class SuppliersController implements ActionListener, MouseListener, KeyLi
         this.views.txt_search_supplier.addKeyListener(this);
         //modificar
         this.views.btn_update_supplier.addActionListener(this);
+        //Eliminar
+        this.views.btn_delete_supplier.addActionListener(this);
+        //Cancelar
+        this.views.btn_cancel_supplier.addActionListener(this);
+        
+        //label proveedores
+        this.views.jLabelSuppliers.addMouseListener(this);
     }
     
     
@@ -105,6 +112,32 @@ public class SuppliersController implements ActionListener, MouseListener, KeyLi
             }
         }
         
+        //Eliminar
+        if(e.getSource() == views.btn_delete_supplier){
+            int row = views.jt_supplier_table.getSelectedRow();
+            if(row == -1){
+                JOptionPane.showMessageDialog(null, "Debes seleccionar el proveedor para eliminar");
+            }else{
+                int id = Integer.parseInt(views.jt_supplier_table.getValueAt(row, 0).toString());
+                int question = JOptionPane.showConfirmDialog(null, "En realidad quieres eliminar este proveedor?");
+                if(question == 0 && supplier_dao.deleteSuppliersQuery(id) != false){
+                    cleanFields();
+                    cleanTable();
+                    listAllSuppliers();
+                    JOptionPane.showMessageDialog(null, "Proveedor eliminado");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Error al eliminar proveedor");
+                }
+            }
+        }
+        
+        //cancelar
+        if(e.getSource() == views.btn_cancel_supplier){
+            cleanFields();
+            views.btn_register_supplier.setEnabled(true);
+            
+        }
+        
     }
     
     //limpiar los input / fields
@@ -155,6 +188,20 @@ public class SuppliersController implements ActionListener, MouseListener, KeyLi
             
             views.btn_register_supplier.setEnabled(false);
             views.txt_supplier_id.setEditable(false);
+        }
+        
+        //label navegacion
+        if(e.getSource() == views.jLabelSuppliers){
+            if(rol.equals("Administrador")){
+                views.jTabbedPane1.setSelectedIndex(5);
+                cleanFields();
+                cleanTable();
+                listAllSuppliers();
+            }else{
+                views.jTabbedPane1.setEnabledAt(5, false);
+                views.jLabelSuppliers.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "NO tienes privilegios de administrador para acceder a esta vista");
+            }
         }
     }
 

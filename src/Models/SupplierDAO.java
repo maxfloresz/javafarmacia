@@ -118,7 +118,7 @@ public class SupplierDAO {
     }
     
     // Eliminar proveedor
-    public boolean deleteSuppliersQuery(String id){
+    public boolean deleteSuppliersQuery(int id){
         String query = "DELETE FROM suppliers WHERE id ="+id;
         
         try {
