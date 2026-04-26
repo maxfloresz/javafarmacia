@@ -85,6 +85,7 @@ public class SystemView extends javax.swing.JFrame {
         
         //Controller category / categoria
         CategoriesController category_account = new CategoriesController(category, category_dao, this);
+        category_account.listAllCategories();
     }
     
     

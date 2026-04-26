@@ -39,12 +39,12 @@ public class CategoryDAO {
     
     }
     
-    
+//    https://www.youtube.com/watch?v=NFFCgjcCE3Y&list=PLffixYYr8M_uPiKk1VZOjhTHE8UGcQvKR&index=46
     //Listar categorias
     public List listCategoryQuery(String val){
         List<Category> list_categories  =new ArrayList<>();
         String query = "SELECT * FROM categories";
-        String query_search_category = "SELECT * FROM categories WWHERE name LIKE '%"+val+"%'";
+        String query_search_category = "SELECT * FROM categories WHERE name LIKE '%"+val+"%'";
         
         try {
             Connection conexion = ConexionSQLite.getConnection();
@@ -73,7 +73,7 @@ public class CategoryDAO {
     
     //Modificar categoria
     public boolean updateCategoryQuery(Category category){
-        String query = "UPDATE categories SET name = ?, update = ? WHERE id = ?";
+        String query = "UPDATE categories SET name = ?, updated = ? WHERE id = ?";
         Timestamp dateTime = new Timestamp(new Date().getTime());
         
         try {
