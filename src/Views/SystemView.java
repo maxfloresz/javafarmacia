@@ -16,10 +16,13 @@
 //https://www.youtube.com/watch?v=kNpQCg_tGCQ&list=PLffixYYr8M_uPiKk1VZOjhTHE8UGcQvKR&index=11
 package Views;
 
+import Controllers.CategoriesController;
 import Controllers.CustomersController;
 import Controllers.EmployeesController;
 import Controllers.SettingsControllers;
 import Controllers.SuppliersController;
+import Models.Category;
+import Models.CategoryDAO;
 import Models.Customer;
 import Models.CustomerDAO;
 import Models.Employee;
@@ -50,6 +53,10 @@ public class SystemView extends javax.swing.JFrame {
     //Proveedor
     Supplier supplier = new Supplier();
     SupplierDAO supplier_dao = new SupplierDAO();
+    //Category
+    Category category = new Category();
+    CategoryDAO category_dao = new CategoryDAO();
+    
     
     public SystemView() {
         initComponents();
@@ -75,6 +82,9 @@ public class SystemView extends javax.swing.JFrame {
         //Controler proveedor /supplier
         SuppliersController supplier_account = new SuppliersController(supplier, supplier_dao, this);
         supplier_account.listAllSuppliers();
+        
+        //Controller category / categoria
+        CategoriesController category_account = new CategoriesController(category, category_dao, this);
     }
     
     

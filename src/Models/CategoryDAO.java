@@ -18,15 +18,15 @@ public class CategoryDAO {
     
     //Registrar Categoria
     public boolean registerCategoryQuery(Category category){
-        String query = "INSERT INTO categories (name, created, update) VALUES (?,?,?)";
+        String query = "INSERT INTO categories (name, created, updated) VALUES (?,?,?)";
         Timestamp dateTime = new Timestamp(new Date().getTime());
         
         try {
             Connection conn = ConexionSQLite.getConnection();
             pst = conn.prepareStatement(query);
             pst.setString(1, category.getName() );
-            pst.setTimestamp(2, dateTime);
-            pst.setTimestamp(3, dateTime);
+            pst.setString(2, dateTime.toString());
+            pst.setString(3, dateTime.toString());
             
             int rowAffected = pst.executeUpdate();
             return rowAffected >0;

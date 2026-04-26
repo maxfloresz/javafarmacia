@@ -111,7 +111,7 @@ public class SuppliersController implements ActionListener, MouseListener, KeyLi
                 }
             }
         }
-        
+//        https://youtu.be/J1Hs0NkonzI?si=yeqML7JT0bE0u5Y6
         //Eliminar
         if(e.getSource() == views.btn_delete_supplier){
             int row = views.jt_supplier_table.getSelectedRow();
