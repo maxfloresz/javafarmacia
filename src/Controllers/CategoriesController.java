@@ -38,6 +38,13 @@ public class CategoriesController implements ActionListener, KeyListener, MouseL
         this.views.btn_update_category.addActionListener(this);
         //escucha la tabla
         this.views.jt_categories_table.addMouseListener(this);
+        //escucha btn eliminar
+        this.views.btn_delete_category.addActionListener(this);
+        //escucha btn cencel
+        this.views.btn_cancel_category.addActionListener(this);
+        
+        //menu category
+        this.views.jLabelCategories.addMouseListener(this);
     }
 
     
@@ -82,6 +89,30 @@ public class CategoriesController implements ActionListener, KeyListener, MouseL
                 }
             }
         }
+        
+        //Eliminar
+        if(e.getSource() == views.btn_delete_category){
+            int row = views.jt_categories_table.getSelectedRow();
+            if(row == -1){
+                JOptionPane.showMessageDialog(null, "Selecciona la categoria a eliminar");
+            }else{
+                int id = Integer.parseInt(views.jt_categories_table.getValueAt(row, 0).toString());
+                int question = JOptionPane.showConfirmDialog(null, "En realidad quieres eliminar esta categoria?");
+                if(question == 0 && category_dao.deleteCategoryQuery(id) != false){
+                    cleanFields();
+                    cleanTable();
+                    listAllCategories();
+                    views.btn_register_category.setEnabled(true);
+                    JOptionPane.showMessageDialog(null, "Categoria eliminada con exito");
+                }
+            }
+        }
+        
+        //btn cancelar
+        if(e.getSource() == views.btn_cancel_category){
+            cleanFields();
+            views.btn_register_category.setEnabled(true);
+        }
     }
     
     public void cleanFields(){
@@ -123,6 +154,21 @@ public class CategoriesController implements ActionListener, KeyListener, MouseL
             views.txt_category_id.setText(views.jt_categories_table.getValueAt(row, 0).toString());
             views.txt_category_name.setText(views.jt_categories_table.getValueAt(row, 1).toString());
             views.btn_register_category.setEnabled(false);
+        }
+        
+        //menu category
+        if(e.getSource() == views.jLabelCategories){
+            if(rol.equals("Administrador")){
+                views.jTabbedPane1.setSelectedIndex(6);
+                cleanFields();
+                cleanTable();
+                listAllCategories();
+            }else{
+                views.jTabbedPane1.setEnabledAt(6, false);
+                views.jLabelCategories.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "No tienes privilegios de administrador");
+            }
+                
         }
     }
 

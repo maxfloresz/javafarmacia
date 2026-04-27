@@ -286,7 +286,8 @@ public class SystemView extends javax.swing.JFrame {
         txt_category_name = new javax.swing.JTextField();
         btn_register_category = new javax.swing.JButton();
         btn_update_category = new javax.swing.JButton();
-        txt_delete_category = new javax.swing.JButton();
+        btn_delete_category = new javax.swing.JButton();
+        btn_cancel_category = new javax.swing.JButton();
         txt_search_category = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -1543,8 +1544,11 @@ public class SystemView extends javax.swing.JFrame {
         btn_update_category.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_update_category.setText("Modificar");
 
-        txt_delete_category.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txt_delete_category.setText("Eliminar");
+        btn_delete_category.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_delete_category.setText("Eliminar");
+
+        btn_cancel_category.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_cancel_category.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -1562,12 +1566,14 @@ public class SystemView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                         .addComponent(btn_update_category, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txt_delete_category, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(txt_category_id, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_register_category, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_register_category, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_cancel_category, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_delete_category, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))))
                 .addGap(44, 44, 44))
         );
         jPanel14Layout.setVerticalGroup(
@@ -1585,8 +1591,10 @@ public class SystemView extends javax.swing.JFrame {
                         .addComponent(jLabel42)
                         .addComponent(txt_category_name, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30)
-                .addComponent(txt_delete_category, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addComponent(btn_delete_category, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btn_cancel_category, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel6.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 20, 520, 270));
@@ -1844,12 +1852,14 @@ public class SystemView extends javax.swing.JFrame {
     public javax.swing.JButton bnt_remove_purchase;
     public javax.swing.JButton btn_add_product_sale;
     public javax.swing.JButton btn_add_product_to_buy;
+    public javax.swing.JButton btn_cancel_category;
     public javax.swing.JButton btn_cancel_customer;
     public javax.swing.JButton btn_cancel_employee;
     public javax.swing.JButton btn_cancel_product;
     public javax.swing.JButton btn_cancel_supplier;
     public javax.swing.JButton btn_confirm_purchase;
     public javax.swing.JButton btn_confirm_sale;
+    public javax.swing.JButton btn_delete_category;
     public javax.swing.JButton btn_delete_customer;
     public javax.swing.JButton btn_delete_employe;
     public javax.swing.JButton btn_delete_product;
@@ -2001,7 +2011,6 @@ public class SystemView extends javax.swing.JFrame {
     public javax.swing.JTextField txt_customer_fullname;
     public javax.swing.JTextField txt_customer_id;
     public javax.swing.JTextField txt_customer_telephone;
-    public javax.swing.JButton txt_delete_category;
     public javax.swing.JTextField txt_email_profile;
     public javax.swing.JTextField txt_employee_address;
     public javax.swing.JTextField txt_employee_email;
