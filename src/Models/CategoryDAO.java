@@ -80,7 +80,7 @@ public class CategoryDAO {
             Connection conexion = ConexionSQLite.getConnection();
             pst = conexion.prepareStatement(query);
             pst.setString(1, category.getName());
-            pst.setTimestamp(2, dateTime);
+            pst.setString(2, dateTime.toString());
             pst.setInt(3, category.getId());
             
             int rowAffected = pst.executeUpdate();

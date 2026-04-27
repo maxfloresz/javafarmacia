@@ -34,6 +34,10 @@ public class CategoriesController implements ActionListener, KeyListener, MouseL
         this.views.btn_register_category.addActionListener(this);
         //txt buscar
         this.views.txt_search_category.addKeyListener(this);
+        //btn modificar
+        this.views.btn_update_category.addActionListener(this);
+        //escucha la tabla
+        this.views.jt_categories_table.addMouseListener(this);
     }
 
     
@@ -41,6 +45,7 @@ public class CategoriesController implements ActionListener, KeyListener, MouseL
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        //registrar
         if(e.getSource() == this.views.btn_register_category){
             if(views.txt_category_name.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "El campo de nombre es obligatorio");
@@ -48,6 +53,7 @@ public class CategoriesController implements ActionListener, KeyListener, MouseL
                 category.setName(views.txt_category_name.getText().trim());
                 if(category_dao.registerCategoryQuery(category)){
                     cleanTable();
+                    cleanFields();
                     listAllCategories();
                     JOptionPane.showMessageDialog(null, "Categoria registrado correctamente.");
                 }else{
@@ -55,6 +61,32 @@ public class CategoriesController implements ActionListener, KeyListener, MouseL
                 }
             }
         }
+        
+        //modificar
+        if(e.getSource() == views.btn_update_category){
+            if(views.txt_category_id.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Selecciona una fila para continuar");
+            }else{
+                if(views.txt_category_id.getText().equals("") 
+                        || views.txt_category_name.getText().equals("")){
+                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+                }else{
+                    category.setId(Integer.parseInt(views.txt_category_id.getText()));
+                    category.setName(views.txt_category_name.getText().trim());
+                    if(category_dao.updateCategoryQuery(category)){
+                        cleanTable();
+                        cleanFields();
+                        listAllCategories();
+                        views.btn_register_category.setEnabled(true);
+                    }
+                }
+            }
+        }
+    }
+    
+    public void cleanFields(){
+        views.txt_category_id.setText("");
+        views.txt_category_name.setText("");
     }
 
     @Override
