@@ -3,6 +3,7 @@ package Controllers;
 
 import Models.CategoryDAO;
 import Models.Category;
+import Models.DynamicComboBox;
 import Models.EmployeeDAO;
 import Views.SystemView;
 
@@ -16,6 +17,7 @@ import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 //https://www.youtube.com/watch?v=mRwjONCNEKc&list=PLffixYYr8M_uPiKk1VZOjhTHE8UGcQvKR&index=45
 public class CategoriesController implements ActionListener, KeyListener, MouseListener{
@@ -45,6 +47,10 @@ public class CategoriesController implements ActionListener, KeyListener, MouseL
         
         //menu category
         this.views.jLabelCategories.addMouseListener(this);
+        
+        getCategoryName(); //cargamos los nombres de category
+        //usamos la libreria swingx-all-1.6.4
+        AutoCompleteDecorator.decorate(views.cbx_product_category);
     }
 
     
@@ -203,6 +209,17 @@ public class CategoriesController implements ActionListener, KeyListener, MouseL
                 model.addRow(row);
             }
             views.jt_categories_table.setModel(model);
+        }
+    }
+    
+    
+    //mostrar el nombre de las categorias
+    public void getCategoryName(){
+        List<Category> list = category_dao.listCategoryQuery(views.txt_search_category.getText());
+        for (int i = 0; i < list.size(); i++) {
+            int id = list.get(i).getId();
+            String name = list.get(i).getName();
+            views.cbx_product_category.addItem(new DynamicComboBox(id, name));
         }
     }
     

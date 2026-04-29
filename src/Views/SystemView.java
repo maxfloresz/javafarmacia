@@ -19,6 +19,7 @@ package Views;
 import Controllers.CategoriesController;
 import Controllers.CustomersController;
 import Controllers.EmployeesController;
+import Controllers.ProductsController;
 import Controllers.SettingsControllers;
 import Controllers.SuppliersController;
 import Models.Category;
@@ -27,6 +28,8 @@ import Models.Customer;
 import Models.CustomerDAO;
 import Models.Employee;
 import Models.EmployeeDAO;
+import Models.Product;
+import Models.ProductDAO;
 import Models.Supplier;
 import Models.SupplierDAO;
 
@@ -56,6 +59,10 @@ public class SystemView extends javax.swing.JFrame {
     //Category
     Category category = new Category();
     CategoryDAO category_dao = new CategoryDAO();
+    //productos
+    Product product = new Product();
+    ProductDAO product_dao = new ProductDAO();
+    
     
     
     public SystemView() {
@@ -86,6 +93,9 @@ public class SystemView extends javax.swing.JFrame {
         //Controller category / categoria
         CategoriesController category_account = new CategoriesController(category, category_dao, this);
         category_account.listAllCategories();
+        
+        //controller productos
+        ProductsController product_section = new ProductsController(product, product_dao, this);
     }
     
     
@@ -144,9 +154,9 @@ public class SystemView extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txt_product_code = new javax.swing.JTextField();
         txt_product_name = new javax.swing.JTextField();
-        txt_product_uni_precio = new javax.swing.JTextField();
+        txt_product_unit_price = new javax.swing.JTextField();
         txt_product_description = new javax.swing.JTextField();
-        txt_prodict_id = new javax.swing.JTextField();
+        txt_product_id = new javax.swing.JTextField();
         cbx_product_category = new javax.swing.JComboBox<>();
         btn_registrar_product = new javax.swing.JButton();
         btn_update_product = new javax.swing.JButton();
@@ -614,13 +624,13 @@ public class SystemView extends javax.swing.JFrame {
 
         txt_product_name.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        txt_product_uni_precio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_product_unit_price.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         txt_product_description.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        txt_prodict_id.setEditable(false);
-        txt_prodict_id.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txt_prodict_id.setEnabled(false);
+        txt_product_id.setEditable(false);
+        txt_product_id.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_product_id.setEnabled(false);
 
         cbx_product_category.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
@@ -650,7 +660,7 @@ public class SystemView extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_product_name, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_product_uni_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_product_unit_price, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_product_code, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -661,7 +671,7 @@ public class SystemView extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_product_description, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbx_product_category, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_prodict_id, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_product_id, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_cancel_product, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -691,8 +701,8 @@ public class SystemView extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel8)
-                    .addComponent(txt_product_uni_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_prodict_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_product_unit_price, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_product_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_delete_product, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(btn_cancel_product, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2023,11 +2033,11 @@ public class SystemView extends javax.swing.JFrame {
     public javax.swing.JTextField txt_name_profile;
     public javax.swing.JPasswordField txt_password_modify_confir;
     public javax.swing.JPasswordField txt_password_modify_profile;
-    public javax.swing.JTextField txt_prodict_id;
     public javax.swing.JTextField txt_product_code;
     public javax.swing.JTextField txt_product_description;
+    public javax.swing.JTextField txt_product_id;
     public javax.swing.JTextField txt_product_name;
-    public javax.swing.JTextField txt_product_uni_precio;
+    public javax.swing.JTextField txt_product_unit_price;
     public javax.swing.JTextField txt_purchanse_amount;
     public javax.swing.JTextField txt_purchanse_id;
     public javax.swing.JTextField txt_purchanse_price;

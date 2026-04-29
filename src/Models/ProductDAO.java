@@ -19,7 +19,7 @@ public class ProductDAO {
     
     // Registrar productos
     public boolean registerProductQuery(Product product){
-        String query = "INSERT INTO products (code, name,description, unit_price, created, update, category_id)"
+        String query = "INSERT INTO products (code, name,description, unit_price, created, updated, category_id)"
                 + "VALUES (?,?,?,?,?,?,?)";
         
         Timestamp dateTime = new Timestamp(new Date().getTime());
@@ -32,8 +32,8 @@ public class ProductDAO {
             pst.setString(2, product.getName());
             pst.setString(3, product.getDescription());
             pst.setDouble(4, product.getUnit_price());
-            pst.setTimestamp(5, dateTime);
-            pst.setTimestamp(6, dateTime);
+            pst.setString(5, dateTime.toString());
+            pst.setString(6, dateTime.toString());
             pst.setInt(7, product.getCategory_id());
             
             int rowAffected = pst.executeUpdate();
@@ -93,7 +93,7 @@ public class ProductDAO {
 //    https://www.youtube.com/watch?v=FNZD5L0YNBE&list=PLffixYYr8M_uPiKk1VZOjhTHE8UGcQvKR&index=25
     // Modificar productos
     public boolean updateProductQuery(Product product){
-        String query ="UPDATE products SET code = ?, name = ?, description = ?, unit_price = ?, update = ?, category_id = ? "
+        String query ="UPDATE products SET code = ?, name = ?, description = ?, unit_price = ?, updated = ?, category_id = ? "
                 + "WHERE id = ?";
         Timestamp dateTime = new Timestamp(new Date().getTime());
         try {
@@ -105,7 +105,7 @@ public class ProductDAO {
             pst.setString(2, product.getName());
             pst.setString(3, product.getDescription());
             pst.setDouble(4, product.getUnit_price());
-            pst.setTimestamp(5, dateTime);
+            pst.setString(5, dateTime.toString());
             pst.setInt(6, product.getCategory_id());
             
             int rowAffected = pst.executeUpdate();
