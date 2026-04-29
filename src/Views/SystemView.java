@@ -96,6 +96,7 @@ public class SystemView extends javax.swing.JFrame {
         
         //controller productos
         ProductsController product_section = new ProductsController(product, product_dao, this);
+        product_section.listAllProducts();
     }
     
     
@@ -163,7 +164,7 @@ public class SystemView extends javax.swing.JFrame {
         btn_delete_product = new javax.swing.JButton();
         btn_cancel_product = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        text_search_product = new javax.swing.JTextField();
+        txt_search_product = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_product_table = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -716,8 +717,8 @@ public class SystemView extends javax.swing.JFrame {
         jLabel9.setText("Buscar:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 70, -1));
 
-        text_search_product.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel1.add(text_search_product, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 160, 30));
+        txt_search_product.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txt_search_product, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 160, 30));
 
         jt_product_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2012,7 +2013,6 @@ public class SystemView extends javax.swing.JFrame {
     public javax.swing.JTable jt_supplier_table;
     public javax.swing.JLabel label_name_employee;
     public javax.swing.JLabel label_name_rol;
-    public javax.swing.JTextField text_search_product;
     public javax.swing.JTextField txt_address_profile;
     public javax.swing.JTextField txt_category_id;
     public javax.swing.JTextField txt_category_name;
@@ -2058,6 +2058,7 @@ public class SystemView extends javax.swing.JFrame {
     public javax.swing.JTextField txt_search_category;
     public javax.swing.JTextField txt_search_customer;
     public javax.swing.JTextField txt_search_employee;
+    public javax.swing.JTextField txt_search_product;
     public javax.swing.JTextField txt_search_supplier;
     public javax.swing.JTextField txt_supplier_address;
     public javax.swing.JTextField txt_supplier_description;

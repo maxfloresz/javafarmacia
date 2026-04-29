@@ -52,8 +52,8 @@ public class ProductDAO {
     //Listar productos
     public List listProductQuery(String val){
         List<Product> list_products = new ArrayList<>();
-        String query = "SELECT pro.*, ca.name AS category_name FROM products pro, categories ca WHERE pro.category_id = ca.id";
-        String query_search_products = "SELECT pro.*, ca.name AS category_name FROM products pro INNER JOIN categories ca"
+        String query = "SELECT pro.*, ca.name AS category_name FROM products pro, categories ca WHERE pro.category_id = ca.id ";
+        String query_search_products = "SELECT pro.*, ca.name AS category_name FROM products pro INNER JOIN categories ca "
                 + "ON pro.category_id = ca.id WHERE pro.name LIKE '%"+val+"%'";
         
         try {
@@ -139,8 +139,8 @@ public class ProductDAO {
     
     //Buscar Producto //cuando doy click el cualquier producto me va aprecer en los labeltext
     public Product searchProduct(int id){
-        String query = "SELECT pro.*, ca.name as category_name FROM products pro"
-                + "INNER JOIN categories ca ON pro.category_id = ca.id"
+        String query = "SELECT pro.*, ca.name as category_name FROM products pro "
+                + "INNER JOIN categories ca ON pro.category_id = ca.id "
                 + "WHERE pro.id = ?";
         Product product = new Product();
         
@@ -172,7 +172,7 @@ public class ProductDAO {
     
     //Buscar productos por codigo
     public Product searchCode(int code){
-        String query = "SELECT pro.id, pro.name FROM products pro"
+        String query = "SELECT pro.id, pro.name FROM products pro "
                 + "WHERE pro.code = ?";
         Product product = new Product();
         try {
