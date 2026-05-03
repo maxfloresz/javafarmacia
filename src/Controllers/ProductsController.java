@@ -40,6 +40,12 @@ public class ProductsController implements ActionListener, MouseListener, KeyLis
         this.views.txt_search_product.addKeyListener(this);
         //btn modificar escucha
         this.views.btn_update_product.addActionListener(this);
+        //Eliminar
+        this.views.btn_delete_product.addActionListener(this);
+        //cancel
+        this.views.btn_cancel_product.addActionListener(this);
+        //label
+        this.views.jLabelProducts.addMouseListener(this);
     }
     
     
@@ -98,6 +104,32 @@ public class ProductsController implements ActionListener, MouseListener, KeyLis
                 }
             }
         }
+//        https://www.youtube.com/watch?v=9ZgD5ma0SvA&list=PLffixYYr8M_uPiKk1VZOjhTHE8UGcQvKR&index=52
+        //Eliminar
+        if(e.getSource() == views.btn_delete_product){
+            int row = views.jt_product_table.getSelectedRow();
+            if(row == -1){
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un producto para poder eliminarlo");
+            }else{
+                int id = Integer.parseInt(views.jt_product_table.getValueAt(row, 0).toString());
+                int question = JOptionPane.showConfirmDialog(null, "En realidad quieres eliminar?");
+                if(question == 0 && product_dao.deleteProductQuery(id) != false){
+                    cleanFields();
+                    cleanTable();
+                    listAllProducts();
+                    views.btn_registrar_product.setEnabled(true);
+                    JOptionPane.showMessageDialog(null, "Producto eliminado!!!");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Error al eliminar el producto");
+                }
+            }
+        }
+        //cancelar
+        if(e.getSource() == views.btn_cancel_product){
+            cleanFields();
+//            cleanTable();
+            views.btn_registrar_product.setEnabled(true);
+        }
     }
     public void cleanFields(){
         views.txt_product_id.setText("");
@@ -154,6 +186,14 @@ public class ProductsController implements ActionListener, MouseListener, KeyLis
             views.btn_registrar_product.setEnabled(false);
             
             
+        }
+        
+        //navegacion
+        if(e.getSource() == views.jLabelProducts){
+            views.jTabbedPane1.setSelectedIndex(0);
+            cleanFields();
+            cleanTable();
+            listAllProducts();
         }
         
     }
