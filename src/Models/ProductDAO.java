@@ -108,6 +108,8 @@ public class ProductDAO {
             pst.setString(5, dateTime.toString());
             pst.setInt(6, product.getCategory_id());
             
+            pst.setInt(7, product.getId());
+            
             int rowAffected = pst.executeUpdate();
             return rowAffected > 0;
             

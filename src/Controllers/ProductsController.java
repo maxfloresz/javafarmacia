@@ -38,6 +38,8 @@ public class ProductsController implements ActionListener, MouseListener, KeyLis
         this.views.jt_product_table.addMouseListener(this);
         //txt buscar escucha
         this.views.txt_search_product.addKeyListener(this);
+        //btn modificar escucha
+        this.views.btn_update_product.addActionListener(this);
     }
     
     
@@ -61,6 +63,7 @@ public class ProductsController implements ActionListener, MouseListener, KeyLis
                 product.setCategory_id(category_id.getId());
                 if(product_dao.registerProductQuery(product)){
                     cleanTable();
+                    cleanFields();
                     listAllProducts();
                     JOptionPane.showMessageDialog(null, "Producto Registrado con exito");
                 }else{
@@ -68,6 +71,40 @@ public class ProductsController implements ActionListener, MouseListener, KeyLis
                 }
             }
         }
+        
+        //Actualizar
+        if(e.getSource() == views.btn_update_product){
+            if(views.txt_product_code.getText().equals("")
+                    || views.txt_product_name.getText().equals("")
+                    || views.txt_product_description.getText().equals("")
+                    || views.txt_product_unit_price.getText().equals("")
+                    || views.cbx_product_category.getSelectedItem().toString().equals("")){
+                JOptionPane.showMessageDialog(null, "Todos los camops son obligatorio");
+            }else{
+                product.setCode(Integer.parseInt(views.txt_product_code.getText()));
+                product.setName(views.txt_product_name.getText().trim());
+                product.setDescription(views.txt_product_description.getText().trim());
+                product.setUnit_price(Double.parseDouble(views.txt_product_unit_price.getText()));
+                DynamicComboBox category_id = (DynamicComboBox) views.cbx_product_category.getSelectedItem();
+                product.setCategory_id(category_id.getId());
+                product.setId(Integer.parseInt(views.txt_product_id.getText()));
+                if(product_dao.updateProductQuery(product)){
+                    cleanTable();
+                    cleanFields();
+                    listAllProducts();
+                    JOptionPane.showMessageDialog(null, "Producto modificado con exito");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Error al modifica el producto");
+                }
+            }
+        }
+    }
+    public void cleanFields(){
+        views.txt_product_id.setText("");
+        views.txt_product_code.setText("");
+        views.txt_product_name.setText("");
+        views.txt_product_description.setText("");
+        views.txt_product_unit_price.setText("");
     }
     
 //    https://www.youtube.com/watch?v=H4d3SNxVka0&list=PLffixYYr8M_uPiKk1VZOjhTHE8UGcQvKR&index=49
