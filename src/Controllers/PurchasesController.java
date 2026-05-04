@@ -3,6 +3,7 @@ package Controllers;
 
 //https://www.youtube.com/watch?v=l1kDjXDqz8k&list=PLffixYYr8M_uPiKk1VZOjhTHE8UGcQvKR&index=53
 
+import Models.DynamicComboBox;
 import Models.EmployeeDAO;
 import Models.Product;
 import Models.ProductDAO;
@@ -15,7 +16,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class PurchasesController implements ActionListener, MouseListener, KeyListener{
     
@@ -25,6 +28,10 @@ public class PurchasesController implements ActionListener, MouseListener, KeyLi
     Product products = new Product();
     ProductDAO products_dao = new ProductDAO();
     String rol = EmployeeDAO.rol_user;
+    private int getIdSupplier = 0;
+    private int item = 0;
+    DefaultTableModel model = new DefaultTableModel();
+    DefaultTableModel temp;
 
     public PurchasesController(Purchase purchase, PurchaseDAO purchase_dao, SystemView views) {
         this.purchase = purchase;
@@ -34,6 +41,10 @@ public class PurchasesController implements ActionListener, MouseListener, KeyLi
         this.views.txt_purchanse_product_code.addKeyListener(this);
         this.views.txt_purchanse_price.addKeyListener(this);
         
+        //Agregar btn escucha
+        this.views.btn_add_product_to_buy.addActionListener(this);
+        
+        
     }
     
     
@@ -41,6 +52,79 @@ public class PurchasesController implements ActionListener, MouseListener, KeyLi
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        //agregar
+        if(e.getSource() == views.btn_add_product_to_buy){
+            DynamicComboBox suplier_cbx = (DynamicComboBox) views.cbx_purchase_supplier.getSelectedItem();
+            int supplier_id = suplier_cbx.getId();
+            if(getIdSupplier == 0){
+                getIdSupplier = supplier_id;
+            }else{
+                if(getIdSupplier != supplier_id){
+                    JOptionPane.showMessageDialog(null, "No puede realizar una misma compra con varios proveedores");
+                }else{
+                    int amount = Integer.parseInt(views.txt_purchanse_amount.getText());
+                    String product_name = views.txt_purchanse_product_name.getText();
+                    double price = Double.parseDouble(views.txt_purchanse_price.getText());
+                    int puerchase_id = Integer.parseInt(views.txt_purchanse_id.getText());
+                    String supplier_name = views.cbx_purchase_supplier.getSelectedItem().toString();
+                    
+                    if(amount > 0){
+                        temp = (DefaultTableModel) views.jt_purchases_table.getModel();
+                        for (int i = 0; i < views.jt_purchases_table.getRowCount(); i++) {
+                            if(views.jt_purchases_table.getValueAt(i, 1).equals(views.txt_purchanse_product_name.getText())){
+                                JOptionPane.showMessageDialog(null, "El producto ya esta registrado en la tabla de compras");
+                                return;
+                            }
+                        }
+                        ArrayList list = new ArrayList();
+                        item = 1;
+                        list.add(item);
+                        list.add(puerchase_id);
+                        list.add(product_name);
+                        list.add(amount);
+                        list.add(price);
+                        list.add(amount * price);
+                        list.add(supplier_name);
+                        
+                        Object[] obj = new Object[6];
+                        obj[0] = list.get(1);
+                        obj[1] = list.get(2);
+                        obj[2] = list.get(3);
+                        obj[3] = list.get(4);
+                        obj[4] = list.get(5);
+                        obj[5] = list.get(6);
+
+                        temp.addRow(obj);
+                        views.jt_purchases_table.setModel(temp);
+                        cleanFieldsPurchases();
+                        views.cbx_purchase_supplier.setEditable(false);
+                        views.txt_purchanse_product_code.requestFocus();
+                        calculatePurchase();
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    public void cleanFieldsPurchases(){
+        views.txt_purchanse_product_name.setText("");
+        views.txt_purchanse_price.setText("");
+        views.txt_purchanse_amount.setText("");
+        views.txt_purchanse_product_code.setText("");
+        views.txt_purchanse_subtotal.setText("");
+        views.txt_purchanse_id.setText("");
+        views.txt_purchanse_total_to_pay.setText("");
+    }
+    
+    public void calculatePurchase(){
+        double total = 0;
+        int num_row = views.jt_purchases_table.getRowCount();
+        for (int i = 0; i < num_row; i++) {
+            total = total + Double.parseDouble(String.valueOf(views.jt_purchases_table.getValueAt(i, 4)));
+            
+        }
+        views.txt_purchanse_total_to_pay.setText(""+total);
     }
 
     @Override

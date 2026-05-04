@@ -1,6 +1,7 @@
 
 package Controllers;
 
+import Models.DynamicComboBox;
 import Models.EmployeeDAO;
 import Models.Supplier;
 import Models.SupplierDAO;
@@ -46,6 +47,8 @@ public class SuppliersController implements ActionListener, MouseListener, KeyLi
         
         //label proveedores
         this.views.jLabelSuppliers.addMouseListener(this);
+        
+        getSupplierName();
     }
     
     
@@ -249,6 +252,16 @@ public class SuppliersController implements ActionListener, MouseListener, KeyLi
         for(int i = 0 ; i < model.getRowCount(); i++){
             model.removeRow(i);
             i = i-1;
+        }
+    }
+    
+     //mostrar el nombre de proveedor
+    public void getSupplierName(){
+        List<Supplier> list = supplier_dao.listSuppliersQuery(views.txt_search_supplier.getText());
+        for (int i = 0; i < list.size(); i++) {
+            int id = list.get(i).getId();
+            String name = list.get(i).getName();
+            views.cbx_purchase_supplier.addItem(new DynamicComboBox(id, name));
         }
     }
 }

@@ -1901,7 +1901,7 @@ public class SystemView extends javax.swing.JFrame {
     public javax.swing.JButton btn_update_product;
     public javax.swing.JButton btn_update_supplier;
     public javax.swing.JComboBox<Object> cbx_product_category;
-    public javax.swing.JComboBox<String> cbx_purchase_supplier;
+    public javax.swing.JComboBox<Object> cbx_purchase_supplier;
     public javax.swing.JComboBox<String> cbx_supplier_city;
     public javax.swing.JComboBox<String> cmb_rol;
     private javax.swing.JLabel jLabel1;
