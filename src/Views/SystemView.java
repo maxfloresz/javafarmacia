@@ -20,6 +20,7 @@ import Controllers.CategoriesController;
 import Controllers.CustomersController;
 import Controllers.EmployeesController;
 import Controllers.ProductsController;
+import Controllers.PurchasesController;
 import Controllers.SettingsControllers;
 import Controllers.SuppliersController;
 import Models.Category;
@@ -30,6 +31,8 @@ import Models.Employee;
 import Models.EmployeeDAO;
 import Models.Product;
 import Models.ProductDAO;
+import Models.Purchase;
+import Models.PurchaseDAO;
 import Models.Supplier;
 import Models.SupplierDAO;
 
@@ -62,7 +65,9 @@ public class SystemView extends javax.swing.JFrame {
     //productos
     Product product = new Product();
     ProductDAO product_dao = new ProductDAO();
-    
+    //compras
+    Purchase purchase = new Purchase();
+    PurchaseDAO purchase_dao = new PurchaseDAO();
     
     
     public SystemView() {
@@ -97,6 +102,10 @@ public class SystemView extends javax.swing.JFrame {
         //controller productos
         ProductsController product_section = new ProductsController(product, product_dao, this);
         product_section.listAllProducts();
+        
+        //controller compras
+        PurchasesController purchase_section = new PurchasesController(purchase, purchase_dao, this);
+
     }
     
     
