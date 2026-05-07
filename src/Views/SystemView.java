@@ -196,7 +196,7 @@ public class SystemView extends javax.swing.JFrame {
         txt_purchanse_total_to_pay = new javax.swing.JTextField();
         btn_add_product_to_buy = new javax.swing.JButton();
         btn_confirm_purchase = new javax.swing.JButton();
-        bnt_remove_purchase = new javax.swing.JButton();
+        btn_remove_purchase = new javax.swing.JButton();
         btn_new_purchase = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jt_purchases_table = new javax.swing.JTable();
@@ -795,8 +795,8 @@ public class SystemView extends javax.swing.JFrame {
         btn_confirm_purchase.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_confirm_purchase.setText("Comprar");
 
-        bnt_remove_purchase.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bnt_remove_purchase.setText("Eliminar");
+        btn_remove_purchase.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_remove_purchase.setText("Eliminar");
 
         btn_new_purchase.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_new_purchase.setText("Nuevo");
@@ -839,7 +839,7 @@ public class SystemView extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btn_add_product_to_buy, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_confirm_purchase, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnt_remove_purchase, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_remove_purchase, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_new_purchase, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -866,7 +866,7 @@ public class SystemView extends javax.swing.JFrame {
                     .addComponent(txt_purchanse_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
                     .addComponent(txt_purchanse_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnt_remove_purchase, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_remove_purchase, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -1869,7 +1869,6 @@ public class SystemView extends javax.swing.JFrame {
     private javax.swing.JPanel Cabecera;
     private javax.swing.JPanel Logo;
     private javax.swing.JPanel Menu;
-    public javax.swing.JButton bnt_remove_purchase;
     public javax.swing.JButton btn_add_product_sale;
     public javax.swing.JButton btn_add_product_to_buy;
     public javax.swing.JButton btn_cancel_category;
@@ -1893,6 +1892,7 @@ public class SystemView extends javax.swing.JFrame {
     public javax.swing.JButton btn_register_employee;
     public javax.swing.JButton btn_register_supplier;
     public javax.swing.JButton btn_registrar_product;
+    public javax.swing.JButton btn_remove_purchase;
     public javax.swing.JButton btn_remove_sale;
     public javax.swing.JButton btn_update_category;
     public javax.swing.JButton btn_update_customer;

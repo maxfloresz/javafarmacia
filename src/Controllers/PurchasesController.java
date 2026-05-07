@@ -43,7 +43,10 @@ public class PurchasesController implements ActionListener, MouseListener, KeyLi
         
         //Agregar btn escucha
         this.views.btn_add_product_to_buy.addActionListener(this);
-        
+        //comprar escucha btn
+        this.views.btn_confirm_purchase.addActionListener(this);
+        //eliminar
+        this.views.btn_remove_purchase.addActionListener(this);
         
     }
     
@@ -105,6 +108,18 @@ public class PurchasesController implements ActionListener, MouseListener, KeyLi
             }
         }
         
+        //comprar
+        if(e.getSource() == views.btn_confirm_purchase){
+            insertPurchase();
+        }
+        
+        //eliminar
+        if(e.getSource() == views.btn_remove_purchase){
+            model = (DefaultTableModel) views.jt_purchases_table.getModel();
+            model.removeRow(views.jt_purchases_table.getSelectedRow());
+            calculatePurchase();
+            views.txt_purchanse_product_code.requestFocus();
+        }
     }
     
     public void cleanFieldsPurchases(){
@@ -125,6 +140,35 @@ public class PurchasesController implements ActionListener, MouseListener, KeyLi
             
         }
         views.txt_purchanse_total_to_pay.setText(""+total);
+    }
+    
+//    https://www.youtube.com/watch?v=msKrDV1if6U&list=PLffixYYr8M_uPiKk1VZOjhTHE8UGcQvKR&index=59
+    public void insertPurchase(){
+        double total = Double.parseDouble(views.txt_purchanse_total_to_pay.getText());
+        int employee_id = EmployeeDAO.id_user;
+        if(purchase_dao.registerPurchaseQuery(getIdSupplier, employee_id, total)){
+            int purchase_id = purchase_dao.purchaseId();
+            for (int i = 0; i < views.jt_purchases_table.getRowCount(); i++) {
+                int porduct_id = Integer.parseInt(views.jt_purchases_table.getValueAt(i, 0).toString());
+                int purchase_amount = Integer.parseInt(views.jt_purchases_table.getValueAt(i, 2).toString());
+                double purchase_price = Double.parseDouble(views.jt_purchases_table.getValueAt(i, 3).toString());
+                double purchase_subtotal = purchase_price * purchase_amount;
+                
+                purchase_dao.registerPurchaseDetailQuery(purchase_id, purchase_price, purchase_amount, purchase_subtotal, porduct_id);
+                
+                
+            }
+            cleanTableTemp();
+            JOptionPane.showMessageDialog(null, "Compra generada con exito!");
+            cleanFieldsPurchases();
+        }
+    }
+    
+    public void cleanTableTemp(){
+        for (int i = 0; i < temp.getRowCount(); i++) {
+            temp.removeRow(i);
+            i = i - 1;
+        }
     }
 
     @Override

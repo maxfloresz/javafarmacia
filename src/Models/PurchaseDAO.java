@@ -18,7 +18,7 @@ public class PurchaseDAO {
 
     //Regostrar Compra
     public boolean registerPurchaseQuery(int suplier_id, int employee_id, double total) {
-        String query = "INSERT INTO (supplier_id, employee_id, total, created)"
+        String query = "INSERT INTO purchases (supplier_id, employee_id, total, created)"
                 + "VALUES (?,?,?,?)";
 
         Timestamp dateTime = new Timestamp(new Date().getTime());
@@ -29,7 +29,7 @@ public class PurchaseDAO {
             pst.setInt(1, suplier_id);
             pst.setInt(2, employee_id);
             pst.setDouble(3, total);
-            pst.setTimestamp(4, dateTime);
+            pst.setString(4, dateTime.toString());
 
             int rowAffected = pst.executeUpdate();
             return rowAffected > 0;
@@ -44,10 +44,10 @@ public class PurchaseDAO {
     }
 
     //Registrar Detalle de compra
-    public boolean retgisterPurchaseDetailQuery(int purchase_id, double purchase_price, int purchase_amount, double purchase_subtotal, int product_id) {
-        String query = "INSERT INTO purchase_details (purchase_id, purchase_price, purchase_amount,"
-                + "purchase_subtotal, purchase_date, purchase_id) VALUES (?,?,?,?,?,?)";
-        Timestamp dateTime = new Timestamp(new Date().getTime());
+    public boolean registerPurchaseDetailQuery(int purchase_id, double purchase_price, int purchase_amount, double purchase_subtotal, int product_id) {
+        String query = "INSERT INTO purchase_details (purchase_id, purchase_price, purchase_amount, "
+                + "purchase_subtotal, product_id) VALUES (?,?,?,?,?)";
+//        Timestamp dateTime = new Timestamp(new Date().getTime());
         try {
             Connection conexion = ConexionSQLite.getConnection();
             pst = conexion.prepareStatement(query);
@@ -55,8 +55,7 @@ public class PurchaseDAO {
             pst.setDouble(2, purchase_price);
             pst.setInt(3, purchase_amount);
             pst.setDouble(4, purchase_subtotal);
-            pst.setTimestamp(5, dateTime);
-            pst.setInt(6, product_id);
+            pst.setInt(5, product_id);
 
             int rowAffected = pst.executeUpdate();
             return rowAffected > 0;

@@ -1133,7 +1133,7 @@
                           <Group type="103" groupAlignment="2" attributes="0">
                               <Component id="btn_add_product_to_buy" alignment="2" min="-2" pref="105" max="-2" attributes="0"/>
                               <Component id="btn_confirm_purchase" alignment="2" min="-2" pref="105" max="-2" attributes="0"/>
-                              <Component id="bnt_remove_purchase" alignment="2" min="-2" pref="105" max="-2" attributes="0"/>
+                              <Component id="btn_remove_purchase" alignment="2" min="-2" pref="105" max="-2" attributes="0"/>
                               <Component id="btn_new_purchase" alignment="2" min="-2" pref="105" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -1165,7 +1165,7 @@
                               <Component id="txt_purchanse_amount" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txt_purchanse_id" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="bnt_remove_purchase" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="btn_remove_purchase" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -1325,7 +1325,7 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="bnt_remove_purchase">
+                <Component class="javax.swing.JButton" name="btn_remove_purchase">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="1"/>
